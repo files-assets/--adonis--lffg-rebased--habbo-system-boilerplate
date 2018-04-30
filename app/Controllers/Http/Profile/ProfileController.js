@@ -1,8 +1,13 @@
 'use strict'
 
 class ProfileController {
-  getProfile ({ view }) {
-    return view.render('pages.profile.profile', { page_title: 'Meu Perfil' })
+  getProfile ({ request, view }) {
+    const { user } = request
+
+    return view.render('pages.profile.profile', {
+      page_title: 'Meu Perfil',
+      user: user.toJSON()
+    })
   }
 
   postProfile () {

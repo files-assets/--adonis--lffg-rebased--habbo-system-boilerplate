@@ -1,0 +1,56 @@
+@layout('master')
+
+@section('breadcrumb')
+  <li class="breadcrumb-item active">Usuários</li>
+@endsection
+
+@section('content')
+  <h1>Lista de Usuários</h1>
+  <table class="table text-center mt-5">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>Usuário</th>
+        <th>Registro</th>
+        <th>Ativo</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @each(user in users)
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>
+            @if(user.is_admin == 1)
+              <span class="badge badge-danger" title="Administrador">
+                <i class="fa fa-star"></i>
+              </span>
+            @endif
+            <a href="/user?view={{ user.username }}">{{ user.username }}</a>
+          </td>
+          <td>{{ moment(user.created_at).format('DD/MM/YYYY') }}</td>
+          <td>
+            @if(user.is_active == 1)
+              <i class="fa fa-check" style="color: green;"></i>
+            @else
+              <i class="fa fa-times" style="color: red;"></i>
+            @endif
+          </td>
+          <td>
+            <a class="btn btn-primary btn-sm" href="/user?view={{ user.username }}" title="Ver perfil de {{ user.username }}">
+              <i class="fa fa-eye"></i>
+            </a>
+            @if(currentUser.is_admin == 1)
+              <a class="btn btn-primary btn-sm" href="#" title="Editar perfil de {{ user.username }}">
+                <i class="fa fa-pencil"></i>
+              </a>
+              <a class="btn btn-danger btn-sm" onclick="if (!confirm('Você tem certeza?')) return false;" href="/" title="Excluir perfil de {{ user.username }}">
+                <i class="fa fa-times"></i>
+              </a>
+            @endif
+          </td>
+        </tr>
+      @endeach
+    </tbody>
+  </table>
+@endsection

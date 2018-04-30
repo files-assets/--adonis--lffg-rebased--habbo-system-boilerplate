@@ -25,5 +25,8 @@ Route.group(() => {
 
   Route.get('/profile', 'Profile/ProfileController.getProfile')
   Route.post('/profile', 'Profile/ProfileController.postProfile').as('profile')
+
+  Route.get('/users', 'User/UserController.index')
+  Route.get('/user', 'User/UserController.show')
   
 }).middleware('auth')
