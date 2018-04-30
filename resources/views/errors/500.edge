@@ -1,0 +1,15 @@
+@layout('blank')
+
+@section('content')
+  <div class="container py-3">
+    <h1>Whoops! Algo deu errado.</h1>
+    <p>Lamentamos, mas houve um erro interno do servidor.</p>
+    
+    @if(message)
+      <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Detalhes do Erro</h4>
+        <p class="mb-0">{{ message }}</p>
+      </div>
+    @endif
+  </div>
+@endsection

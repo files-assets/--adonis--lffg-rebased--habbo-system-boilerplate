@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  @include('partials.head')
+</head>
+<body>
+  <div id="wrapper">
+    <header class="header">
+      @section('navbar')
+        @include('partials.navbar')
+      @endsection
+    </header>
+
+    <div id="content" class="container py-4">
+      {{-- Success Flash Message --}}
+      @if(flashMessage('success'))
+        <div class="alert alert-success">
+          {{ flashMessage('success') }}
+        </div>
+      @endif
+      {{-- Danger Flash Message --}}
+      @if(flashMessage('danger'))
+        <div class="alert alert-danger">
+          {{ flashMessage('danger') }}
+        </div>
+      @endif
+
+      @if(url !== '/')
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/" aria-label="Página Inicial">
+                <i class="fa fa-home" aria-hidden="true"></i>
+              </a>
+            </li>
+            @!section('breadcrumb')
+          </ol>
+        </nav>
+      @endif
+
+      @!section('content')
+    </div>
+
+    @section('footer')
+      @include('partials.footer')
+    @endsection
+  </div>
+
+  @!section('before-end')
+  @include('partials.scripts')
+</body>
+</html>

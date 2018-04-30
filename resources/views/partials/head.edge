@@ -1,0 +1,19 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="shortcut icon" href="/default.ico" />
+
+<title>
+  @if(page_title)
+    {{ page_title }} &middot; System
+  @else
+    System
+  @endif
+</title>
+
+{{ css('css/bootstrap.min.css') }}
+{{ css('css/main.css') }}
+{{ css('fonts/font-awesome/css/font-awesome.min.css') }}
+
+@!section('styles')
+@!section('head')

@@ -1,0 +1,50 @@
+@layout('blank')
+
+@section('content')
+  <div class="container py-4">
+    @if(flashMessage('success'))
+      <div class="alert alert-success">
+        {{ flashMessage('success') }}
+      </div>
+    @endif
+
+    @if(flashMessage('danger'))
+      <div class="alert alert-danger">
+        {{ flashMessage('danger') }}
+      </div>
+    @endif
+
+    <form action="{{ route('login') }}" method="post">
+      <h1>Login</h1>
+
+      <div class="form-group">
+        <label for="username">Nome de usuário:</label>
+        <input type="text" id="username" name="username" class="form-control {{ hasErrorFor('username') ? 'is-invalid' : '' }}" value="{{ old('username', '') }}" />
+        {{ elIf('<span class="invalid-feedback">$self</span>', getErrorFor('username'), hasErrorFor('username')) }}
+      </div>
+      <div class="form-group">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" class="form-control {{ hasErrorFor('password') ? 'is-invalid' : '' }}" value="{{ old('password', '') }}" />
+        {{ elIf('<span class="invalid-feedback">$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
+      </div>
+      <div class="form-group">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="remember" name="remember" value="on">
+          <label class="custom-control-label" for="remember">
+            Continuar conectado.
+            <small class="form-help text-muted d-block">Não recomendado para computadores públicos.</small>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Login" class="btn btn-primary" />
+      </div>
+    
+      {{ csrfField() }}
+    </form>
+
+    <div class="alert alert-info">
+      Não tem conta? <a href="/session/register/" class="alert-link">Crie uma clicando aqui.</a>
+    </div>
+  </div>
+@endsection

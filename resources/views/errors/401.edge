@@ -1,0 +1,44 @@
+@layout('blank')
+
+@section('head')
+  <noscript>
+    <meta http-equiv="refresh" content="7; url=/session/login/" />
+  </noscript>
+@endsection
+
+@section('content')
+  <div class="alert alert-danger m-4">
+    <h4 class="alert-heading">Acesso negado</h4>
+    <p>
+      Você não tem permissão para visualizar essa página.
+    </p>
+    <hr />
+    <p class="mb-0">
+      Você será redirecionado para <a href="/session/login" class="alert-link">página de login</a> em <span id="counter">3</span> <span id="counter-label">segundos</span>.
+    </p>
+  </div>
+@endsection
+
+@section('scripts')
+  <script>
+    (function () {
+      'use strict';
+
+      var num = parseInt($('#counter').text());
+
+      var counterInterval = setInterval(function () {
+        num--;
+        $('#counter').text(num);
+
+        if (num <= 1) {
+          $('#counter-label').text('segundo');
+        }
+
+        if (num === 0) {
+          clearInterval(counterInterval);
+          location.pathname = '/session/login/';
+        }
+      }, 1000);
+    })();
+  </script>
+@endsection

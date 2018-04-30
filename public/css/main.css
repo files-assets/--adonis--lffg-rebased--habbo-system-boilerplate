@@ -1,0 +1,18 @@
+html {
+  font-size: 17px;
+}
+
+html,
+body,
+#wrapper {
+  min-height: 100vh;
+}
+
+body > #wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+body > #wrapper > #content {
+  flex-grow: 1;
+}

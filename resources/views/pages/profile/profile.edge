@@ -1,0 +1,36 @@
+@layout('master')
+
+@section('breadcrumb')
+  <li class="breadcrumb-item active">Meu Perfil</li>
+@endsection
+
+@section('content')
+  <h1>Meu Perfil &middot; <small>{{ auth.user.username }}</small></h1>
+
+  <div class="card mt-5">
+    <div class="card-body">
+      <div class="alert alert-info">
+        <strong>Este é o seu perfil privado.</strong> Para ver o seu perfil público, <a href="/view-profile?u={{ auth.user.username }}" class="alert-link">clique aqui</a>.
+      </div>
+      <p>
+        Para modificar os dados do seu perfil, altere os campos a seguir.
+        <strong>Modifique somente os valores que deseja alterar.</strong>
+      </p>
+      <form action="{{ route('profile') }}" method="post">
+        <div class="form-group">
+          <label for="username">Nome de usuário (nick):</label>
+          <input type="text" id="username" name="username" class="form-control" value="{{ old('username', auth.user.username) }}" />
+        </div>
+        <div class="form-group">
+          <label for="password">Senha:</label>
+          <input type="password" id="password" name="password" class="form-control" value="{{ old('password', '') }}" />
+        </div>
+        <div class="form-group mb-0">
+          <input type="submit" value="Prosseguir" class="btn btn-primary">
+        </div>
+
+        {{ csrfField() }}
+      </form>
+    </div>
+  </div>
+@endsection
